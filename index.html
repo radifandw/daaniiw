@@ -556,12 +556,6 @@ document.querySelectorAll('.card').forEach(card => {
   });
   card.addEventListener('mouseleave', function() { this.style.transform = ''; });
 });
-</script>
-<script>
-/* =========================
-   WHATSAPP DIRECT SUPER PRO
-========================= */
-
 function openWA(e){
   e.preventDefault();
 
@@ -579,45 +573,67 @@ function openWA(e){
   const waWeb = `https://wa.me/${phone}?text=${text}`;
   const waDesktop = `https://web.whatsapp.com/send?phone=${phone}&text=${text}`;
 
-  /* ===== Loading effect ===== */
-  const loader = document.createElement("div");
-  loader.style.cssText = `
-    position:fixed;
-    inset:0;
-    background:#04060f;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    z-index:9999;
-    font-family:sans-serif;
-    color:white;
-    letter-spacing:1px;
+  /* ===== Custom Alert Modal ===== */
+  const alertModal = document.createElement("div");
+  alertModal.style.cssText = `
+    position: fixed; inset: 0; background: rgba(4, 6, 15, 0.85);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 9999; font-family: 'DM Sans', sans-serif;
+    padding: 24px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    opacity: 0; transition: opacity 0.3s ease;
   `;
-  loader.innerHTML = "Opening WhatsApp...";
-  document.body.appendChild(loader);
+  
+  alertModal.innerHTML = `
+    <div style="background: var(--surface); border: 1px solid var(--border); padding: 28px 24px; border-radius: 20px; max-width: 320px; width: 100%; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.5); transform: translateY(20px); transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);">
+      <div style="font-size: 40px; margin-bottom: 12px; filter: drop-shadow(0 0 10px rgba(246,173,85,0.4));">⚠️</div>
+      <h3 style="font-size: 14px; margin-bottom: 16px; color: var(--accent-3); line-height: 1.5; font-weight: 600; letter-spacing: 0.5px;">JIKA TIDAK BISA BERPINDAH KE WA, IKUTI BERIKUT:</h3>
+      <div style="text-align: left; font-size: 12.5px; color: var(--text-primary); opacity: 0.9; line-height: 1.8; margin-bottom: 24px; background: rgba(0,0,0,0.3); padding: 14px 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
+        <b>1.</b> KLIK TITIK TIGA DI POJOK KANAN ATAS<br>
+        <b>2.</b> PILIH MENU "BUKA DI BROWSER"
+      </div>
+      <button id="btn-lanjut-wa" style="background: linear-gradient(90deg, var(--accent-1), var(--accent-2)); color: #fff; border: none; padding: 14px 24px; border-radius: 99px; font-weight: 600; font-size: 13px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(99,179,237,0.3); transition: transform 0.2s;">
+        MENGERTI, LANJUTKAN
+      </button>
+    </div>
+  `;
+  document.body.appendChild(alertModal);
 
-  /* ===== Redirect Logic ===== */
+  // Animasi masuk (Fade In + Slide Up)
+  requestAnimationFrame(() => {
+    alertModal.style.opacity = "1";
+    alertModal.firstElementChild.style.transform = "translateY(0)";
+  });
 
-  if(isAndroid || isiOS){
-      // buka langsung app
-      window.location.href = waApp;
+  // Event listener untuk tombol lanjut
+  document.getElementById("btn-lanjut-wa").addEventListener("click", function() {
+    this.style.transform = "scale(0.96)"; // Efek klik
+    
+    // Ubah tampilan menjadi state loading
+    setTimeout(() => {
+      alertModal.firstElementChild.innerHTML = `
+        <div style="font-size: 14px; letter-spacing: 1px; color: var(--accent-1); padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 12px;">
+          <div style="width: 24px; height: 24px; border: 3px solid rgba(99,179,237,0.2); border-top-color: var(--accent-1); border-radius: 50%; animation: spinRing 1s linear infinite;"></div>
+          Membuka WhatsApp...
+        </div>
+      `;
+      
+      /* ===== Redirect Logic ===== */
+      if(isAndroid || isiOS){
+          window.location.href = waApp;
+          setTimeout(()=>{ window.location.href = waWeb; }, 1200);
+      } else if(isTikTok){
+          window.location.href = waWeb;
+      } else {
+          window.location.href = waDesktop;
+      }
 
-      // fallback jika gagal
-      setTimeout(()=>{
-        window.location.href = waWeb;
-      },1200);
-
-  } else if(isTikTok){
-      // TikTok browser butuh https
-      window.location.href = waWeb;
-
-  } else {
-      // Desktop
-      window.location.href = waDesktop;
-  }
-
-  // hapus loader
-  setTimeout(()=> loader.remove(), 2500);
+      // Hapus modal setelah dieksekusi
+      setTimeout(() => {
+        alertModal.style.opacity = "0";
+        setTimeout(() => alertModal.remove(), 300);
+      }, 2500);
+    }, 150);
+  });
 }
 </script>
 </body>
