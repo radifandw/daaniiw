@@ -344,7 +344,7 @@
   <div class="divider"><span>services</span></div>
 
   <div class="menu">
-    <a href="https://sociabuzz.com/rdwvoucher/tribe" target="_blank" class="card">
+    <a href="javascript:void(0)" onclick="openPayment(event)" class="card">
       <div class="card-icon">
         <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNGhrMDI3azlsajZsdGZya3o4bjBydHZyaTJlOWhoeWQ2MW91M2dsaiZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/RNxm925CNsOODF6MbJ/giphy.gif" alt="">
         <div class="icon-overlay"></div>
@@ -556,6 +556,101 @@ document.querySelectorAll('.card').forEach(card => {
   });
   card.addEventListener('mouseleave', function() { this.style.transform = ''; });
 });
+/* =========================
+   PAYMENT INSTRUCTION MODAL
+========================= */
+function openPayment(e) {
+  e.preventDefault();
+
+  const paymentUrl = "https://sociabuzz.com/rdwvoucher/tribe";
+
+  const alertModal = document.createElement("div");
+  alertModal.style.cssText = `
+    position: fixed; inset: 0; background: rgba(4, 6, 15, 0.85);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 9999; font-family: 'DM Sans', sans-serif;
+    padding: 24px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    opacity: 0; transition: opacity 0.3s ease;
+  `;
+  
+  // Desain dibuat menjadi list box agar terlihat sangat rapi dan profesional
+  alertModal.innerHTML = `
+    <div style="background: var(--surface); border: 1px solid var(--border); padding: 28px 20px; border-radius: 20px; max-width: 340px; width: 100%; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.5); transform: translateY(20px); transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);">
+      <div style="font-size: 38px; margin-bottom: 8px; filter: drop-shadow(0 0 10px rgba(99,179,237,0.4));">🛒</div>
+      <h3 style="font-size: 16px; margin-bottom: 20px; color: var(--text-primary); font-weight: 600; letter-spacing: 0.5px;">TATA CARA ORDER</h3>
+      
+      <div style="text-align: left; display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px;">
+        
+        <div style="background: rgba(255,255,255,0.03); padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 12px;">
+          <div style="background: var(--accent-1); color: #000; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 12px; flex-shrink: 0;">1</div>
+          <div style="font-size: 12.5px; color: var(--text-primary); line-height: 1.4;">Isi <b>Nominal</b> sesuai harga.</div>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.03); padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 12px;">
+          <div style="background: var(--accent-2); color: #000; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 12px; flex-shrink: 0;">2</div>
+          <div style="font-size: 12.5px; color: var(--text-primary); line-height: 1.4;">Kolom Pesan: Tulis <b>Username & Barang</b>.</div>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.03); padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 12px;">
+          <div style="background: var(--accent-3); color: #000; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 12px; flex-shrink: 0;">3</div>
+          <div style="font-size: 12.5px; color: var(--text-primary); line-height: 1.4;">Kolom Nama: Tulis <b>Username + Display Name</b> Roblox.</div>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.03); padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 12px;">
+          <div style="background: #34d399; color: #000; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 12px; flex-shrink: 0;">4</div>
+          <div style="font-size: 12.5px; color: var(--text-primary); line-height: 1.4;">Kolom Email: <b>Bebas</b> (Cth: roblox@gmail.com).</div>
+        </div>
+
+      </div>
+
+      <button id="btn-lanjut-pay" style="background: linear-gradient(90deg, var(--accent-1), var(--accent-2)); color: #fff; border: none; padding: 14px 24px; border-radius: 99px; font-weight: 600; font-size: 13px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(99,179,237,0.3); transition: transform 0.2s;">
+        SAYA MENGERTI, LANJUT PEMBAYARAN
+      </button>
+      
+      <div style="margin-top: 16px; text-align: center;">
+        <button id="btn-batal-pay" style="background: transparent; border: none; color: var(--text-muted); font-size: 11.5px; cursor: pointer; text-decoration: underline;">
+          Kembali
+        </button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(alertModal);
+
+  // Animasi masuk
+  requestAnimationFrame(() => {
+    alertModal.style.opacity = "1";
+    alertModal.firstElementChild.style.transform = "translateY(0)";
+  });
+
+  // Tombol Batal
+  document.getElementById("btn-batal-pay").addEventListener("click", function() {
+    alertModal.style.opacity = "0";
+    setTimeout(() => alertModal.remove(), 300);
+  });
+
+  // Tombol Lanjut ke Pembayaran
+  document.getElementById("btn-lanjut-pay").addEventListener("click", function() {
+    this.style.transform = "scale(0.96)"; 
+    
+    setTimeout(() => {
+      alertModal.firstElementChild.innerHTML = `
+        <div style="font-size: 14px; letter-spacing: 1px; color: var(--accent-1); padding: 30px 20px; display: flex; flex-direction: column; align-items: center; gap: 16px;">
+          <div style="width: 28px; height: 28px; border: 3px solid rgba(99,179,237,0.2); border-top-color: var(--accent-1); border-radius: 50%; animation: spinRing 1s linear infinite;"></div>
+          Mengarahkan ke Halaman Pembayaran...
+        </div>
+      `;
+      
+      // Buka tab baru setelah jeda sedikit
+      setTimeout(() => {
+        window.open(paymentUrl, "_blank");
+        
+        // Tutup modal setelah diarahkan
+        alertModal.style.opacity = "0";
+        setTimeout(() => alertModal.remove(), 300);
+      }, 800);
+    }, 150);
+  });
+}
 function openWA(e){
   e.preventDefault();
 
