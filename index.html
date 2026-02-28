@@ -5,8 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DAANII_W | Service Hub</title>
-<!-- Link berikut DIHAPUS karena salah (wa.me bukan stylesheet):
-     <link href="https://wa.me/6287767775774" rel="stylesheet"> -->
+<link href="https://wa.me/6287767775774" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -39,22 +38,90 @@
     position: relative;
   }
 
-  #bg-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+  /* Canvas behind everything */
+  #bg-canvas {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
 
-  .orb { position: fixed; border-radius: 50%; filter: blur(80px); pointer-events: none; z-index: 0; mix-blend-mode: screen; }
-  .orb-1 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(99,179,237,0.18) 0%, transparent 70%); top: -150px; left: -150px; animation: floatOrb1 12s ease-in-out infinite; }
-  .orb-2 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(183,148,244,0.15) 0%, transparent 70%); bottom: -100px; right: -100px; animation: floatOrb2 15s ease-in-out infinite; }
-  .orb-3 { width: 300px; height: 300px; background: radial-gradient(circle, rgba(246,173,85,0.09) 0%, transparent 70%); top: 40%; left: 50%; transform: translate(-50%,-50%); animation: floatOrb3 10s ease-in-out infinite; }
-  .orb-4 { width: 250px; height: 250px; background: radial-gradient(circle, rgba(52,211,153,0.09) 0%, transparent 70%); top: 20%; right: 10%; animation: floatOrb4 18s ease-in-out infinite; }
-  @keyframes floatOrb1 { 0%,100% { transform: translate(0,0) scale(1); } 33% { transform: translate(80px,60px) scale(1.1); } 66% { transform: translate(-40px,100px) scale(0.95); } }
-  @keyframes floatOrb2 { 0%,100% { transform: translate(0,0) scale(1); } 40% { transform: translate(-70px,-80px) scale(1.15); } 70% { transform: translate(50px,-30px) scale(0.9); } }
-  @keyframes floatOrb3 { 0%,100% { transform: translate(-50%,-50%) scale(1); opacity:0.6; } 50% { transform: translate(-50%,-50%) scale(1.3); opacity:1; } }
-  @keyframes floatOrb4 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(-60px,80px); } }
+  /* Floating orbs */
+  .orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+    mix-blend-mode: screen;
+  }
+  .orb-1 {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(99,179,237,0.18) 0%, transparent 70%);
+    top: -150px; left: -150px;
+    animation: floatOrb1 12s ease-in-out infinite;
+  }
+  .orb-2 {
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(183,148,244,0.15) 0%, transparent 70%);
+    bottom: -100px; right: -100px;
+    animation: floatOrb2 15s ease-in-out infinite;
+  }
+  .orb-3 {
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(246,173,85,0.09) 0%, transparent 70%);
+    top: 40%; left: 50%;
+    transform: translate(-50%,-50%);
+    animation: floatOrb3 10s ease-in-out infinite;
+  }
+  .orb-4 {
+    width: 250px; height: 250px;
+    background: radial-gradient(circle, rgba(52,211,153,0.09) 0%, transparent 70%);
+    top: 20%; right: 10%;
+    animation: floatOrb4 18s ease-in-out infinite;
+  }
+  @keyframes floatOrb1 {
+    0%,100% { transform: translate(0,0) scale(1); }
+    33%      { transform: translate(80px,60px) scale(1.1); }
+    66%      { transform: translate(-40px,100px) scale(0.95); }
+  }
+  @keyframes floatOrb2 {
+    0%,100% { transform: translate(0,0) scale(1); }
+    40%      { transform: translate(-70px,-80px) scale(1.15); }
+    70%      { transform: translate(50px,-30px) scale(0.9); }
+  }
+  @keyframes floatOrb3 {
+    0%,100% { transform: translate(-50%,-50%) scale(1); opacity:0.6; }
+    50%      { transform: translate(-50%,-50%) scale(1.3); opacity:1; }
+  }
+  @keyframes floatOrb4 {
+    0%,100% { transform: translate(0,0); }
+    50%      { transform: translate(-60px,80px); }
+  }
 
-  .grid-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; background-image: linear-gradient(rgba(99,179,237,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(99,179,237,0.04) 1px, transparent 1px); background-size: 60px 60px; mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 80%); -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 80%); }
+  /* Grid mesh */
+  .grid-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(99,179,237,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(99,179,237,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 80%);
+  }
 
+  /* Aurora streaks */
   .aurora { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
-  .aurora-streak { position: absolute; height: 1px; border-radius: 999px; opacity: 0; animation: streakFly linear infinite; }
+  .aurora-streak {
+    position: absolute;
+    height: 1px;
+    border-radius: 999px;
+    opacity: 0;
+    animation: streakFly linear infinite;
+  }
   .aurora-streak:nth-child(1)  { width:200px; top:15%; left:-220px; background:linear-gradient(90deg,transparent,var(--accent-1),transparent); animation-duration:8s;  animation-delay:0s;   }
   .aurora-streak:nth-child(2)  { width:300px; top:35%; left:-320px; background:linear-gradient(90deg,transparent,var(--accent-2),transparent); animation-duration:11s; animation-delay:2s;   }
   .aurora-streak:nth-child(3)  { width:150px; top:60%; left:-170px; background:linear-gradient(90deg,transparent,var(--accent-3),transparent); animation-duration:7s;  animation-delay:4s;   }
@@ -63,55 +130,177 @@
   .aurora-streak:nth-child(6)  { width:220px; top:25%; left:-240px; background:linear-gradient(90deg,transparent,var(--accent-2),transparent); animation-duration:10s; animation-delay:3.5s; }
   .aurora-streak:nth-child(7)  { width:130px; top:70%; left:-150px; background:linear-gradient(90deg,transparent,var(--accent-3),transparent); animation-duration:6s;  animation-delay:7s;   }
   .aurora-streak:nth-child(8)  { width:280px; top:5%;  left:-300px; background:linear-gradient(90deg,transparent,var(--accent-1),transparent); animation-duration:14s; animation-delay:0.5s; }
-  @keyframes streakFly { 0% { transform:translateX(0); opacity:0; } 5% { opacity:1; } 95% { opacity:1; } 100% { transform:translateX(calc(100vw + 400px)); opacity:0; } }
+  @keyframes streakFly {
+    0%   { transform:translateX(0); opacity:0; }
+    5%   { opacity:1; }
+    95%  { opacity:1; }
+    100% { transform:translateX(calc(100vw + 400px)); opacity:0; }
+  }
 
-  .grain { position: fixed; inset: -50%; width: 200%; height: 200%; z-index: 0; pointer-events: none; opacity: 0.025; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 256px; animation: grainShift 0.4s steps(1) infinite; }
-  @keyframes grainShift { 0% { transform:translate(0,0); } 25% { transform:translate(-5%,-10%); } 50% { transform:translate(-10%,5%); } 75% { transform:translate(5%,-5%); } 100% { transform:translate(10%,10%); } }
+  /* Grain */
+  .grain {
+    position: fixed;
+    inset: -50%;
+    width: 200%; height: 200%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 256px;
+    animation: grainShift 0.4s steps(1) infinite;
+  }
+  @keyframes grainShift {
+    0%   { transform:translate(0,0); }
+    25%  { transform:translate(-5%,-10%); }
+    50%  { transform:translate(-10%,5%); }
+    75%  { transform:translate(5%,-5%); }
+    100% { transform:translate(10%,10%); }
+  }
 
-  #mouse-glow { position: fixed; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(99,179,237,0.07) 0%, transparent 70%); pointer-events: none; z-index: 0; transform: translate(-50%,-50%); transition: left 0.08s, top 0.08s; filter: blur(20px); }
+  /* Mouse glow */
+  #mouse-glow {
+    position: fixed;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(99,179,237,0.07) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+    transform: translate(-50%,-50%);
+    transition: left 0.08s, top 0.08s;
+    filter: blur(20px);
+  }
 
-  .container { position: relative; z-index: 1; width: 100%; max-width: 400px; animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) both; }
-  @keyframes fadeUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+  /* ─── CONTENT ─── */
+  .container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 400px;
+    animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) both;
+  }
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(30px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
 
   .profile { display:flex; flex-direction:column; align-items:center; margin-bottom:40px; }
   .avatar-wrap { position:relative; margin-bottom:18px; }
-  .avatar-ring { position: absolute; inset:-4px; border-radius:50%; background: conic-gradient(from 0deg,var(--accent-1),var(--accent-2),var(--accent-3),var(--accent-1)); animation: spinRing 4s linear infinite; z-index: 0; }
+
+  .avatar-ring {
+    position: absolute; inset:-4px; border-radius:50%;
+    background: conic-gradient(from 0deg,var(--accent-1),var(--accent-2),var(--accent-3),var(--accent-1));
+    animation: spinRing 4s linear infinite;
+    z-index: 0;
+  }
   .avatar-ring::before { content:''; position:absolute; inset:3px; border-radius:50%; background:var(--bg); }
   @keyframes spinRing { to { transform:rotate(360deg); } }
-  .avatar-glow-outer { position:absolute; inset:-24px; border-radius:50%; background: radial-gradient(circle,rgba(99,179,237,0.22) 0%,transparent 70%); animation: pulseGlow 3s ease-in-out infinite; z-index:-1; }
-  @keyframes pulseGlow { 0%,100% { opacity:0.5; transform:scale(1); } 50% { opacity:1; transform:scale(1.15); } }
+
+  .avatar-glow-outer {
+    position:absolute; inset:-24px; border-radius:50%;
+    background: radial-gradient(circle,rgba(99,179,237,0.22) 0%,transparent 70%);
+    animation: pulseGlow 3s ease-in-out infinite;
+    z-index:-1;
+  }
+  @keyframes pulseGlow {
+    0%,100% { opacity:0.5; transform:scale(1); }
+    50%      { opacity:1;   transform:scale(1.15); }
+  }
+
   .avatar { display:block; width:90px; height:90px; border-radius:50%; object-fit:cover; position:relative; z-index:1; }
-  .status-dot { position:absolute; bottom:3px; right:3px; width:14px; height:14px; background:#4ade80; border-radius:50%; border:2.5px solid var(--bg); z-index:2; box-shadow:0 0 8px rgba(74,222,128,0.6); animation: statusPulse 2s ease-in-out infinite; }
-  @keyframes statusPulse { 0%,100% { box-shadow:0 0 6px rgba(74,222,128,0.5); } 50% { box-shadow:0 0 18px rgba(74,222,128,1); } }
-  .profile-name { font-family:'DM Serif Display',serif; font-size:26px; font-weight:400; letter-spacing:-0.3px; background:linear-gradient(135deg,#f0f4ff 0%,rgba(240,244,255,0.65) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:8px; }
+
+  .status-dot {
+    position:absolute; bottom:3px; right:3px;
+    width:14px; height:14px;
+    background:#4ade80; border-radius:50%;
+    border:2.5px solid var(--bg); z-index:2;
+    box-shadow:0 0 8px rgba(74,222,128,0.6);
+    animation: statusPulse 2s ease-in-out infinite;
+  }
+  @keyframes statusPulse {
+    0%,100% { box-shadow:0 0 6px rgba(74,222,128,0.5); }
+    50%      { box-shadow:0 0 18px rgba(74,222,128,1); }
+  }
+
+  .profile-name {
+    font-family:'DM Serif Display',serif;
+    font-size:26px; font-weight:400; letter-spacing:-0.3px;
+    background:linear-gradient(135deg,#f0f4ff 0%,rgba(240,244,255,0.65) 100%);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+    margin-bottom:8px;
+  }
+
   .badge-row { display:flex; gap:8px; flex-wrap:wrap; justify-content:center; }
-  .badge { display:inline-flex; align-items:center; gap:5px; padding:4px 10px; border-radius:99px; font-size:10.5px; font-weight:500; border:1px solid var(--border); background:var(--surface); color:var(--text-muted); backdrop-filter:blur(8px); }
+  .badge {
+    display:inline-flex; align-items:center; gap:5px;
+    padding:4px 10px; border-radius:99px;
+    font-size:10.5px; font-weight:500;
+    border:1px solid var(--border); background:var(--surface);
+    color:var(--text-muted); backdrop-filter:blur(8px);
+  }
   .badge .dot { width:5px; height:5px; border-radius:50%; }
   .badge.speed .dot { background:var(--accent-1); box-shadow:0 0 6px var(--accent-1); }
   .badge.trust .dot { background:#4ade80; box-shadow:0 0 6px #4ade80; }
+
   .divider { display:flex; align-items:center; gap:12px; margin-bottom:18px; opacity:0.3; }
   .divider::before,.divider::after { content:''; flex:1; height:1px; background:linear-gradient(90deg,transparent,rgba(255,255,255,0.35),transparent); }
   .divider span { font-size:9px; letter-spacing:2.5px; text-transform:uppercase; font-weight:500; }
+
   .menu { display:flex; flex-direction:column; gap:12px; animation:fadeUp 0.9s 0.12s cubic-bezier(0.16,1,0.3,1) both; }
-  .card { display:flex; align-items:center; gap:16px; padding:18px 20px; border-radius:18px; background:var(--surface); border:1px solid var(--border); text-decoration:none; color:var(--text-primary); backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px); position:relative; overflow:hidden; transition:border-color 0.3s,transform 0.3s cubic-bezier(0.16,1,0.3,1),box-shadow 0.3s,background 0.3s; }
-  .card::before { content:''; position:absolute; top:0; left:-100%; width:60%; height:100%; background:linear-gradient(90deg,transparent,rgba(255,255,255,0.05),transparent); transition:left 0.5s ease; pointer-events:none; }
+
+  .card {
+    display:flex; align-items:center; gap:16px;
+    padding:18px 20px; border-radius:18px;
+    background:var(--surface); border:1px solid var(--border);
+    text-decoration:none; color:var(--text-primary);
+    backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px);
+    position:relative; overflow:hidden;
+    transition:border-color 0.3s,transform 0.3s cubic-bezier(0.16,1,0.3,1),box-shadow 0.3s,background 0.3s;
+  }
+  .card::before {
+    content:''; position:absolute; top:0; left:-100%; width:60%; height:100%;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,0.05),transparent);
+    transition:left 0.5s ease; pointer-events:none;
+  }
   .card:hover::before { left:150%; }
-  .card:hover { transform:translateY(-3px); border-color:var(--border-hover); box-shadow:0 20px 50px rgba(99,179,237,0.14),0 0 0 1px rgba(99,179,237,0.1); background:var(--surface-hover); }
-  .card::after { content:''; position:absolute; left:0; top:22%; bottom:22%; width:3px; border-radius:0 3px 3px 0; background:linear-gradient(180deg,var(--accent-1),var(--accent-2)); opacity:0; transition:opacity 0.3s; }
+  .card:hover {
+    transform:translateY(-3px);
+    border-color:var(--border-hover);
+    box-shadow:0 20px 50px rgba(99,179,237,0.14),0 0 0 1px rgba(99,179,237,0.1);
+    background:var(--surface-hover);
+  }
+  .card::after {
+    content:''; position:absolute; left:0; top:22%; bottom:22%;
+    width:3px; border-radius:0 3px 3px 0;
+    background:linear-gradient(180deg,var(--accent-1),var(--accent-2));
+    opacity:0; transition:opacity 0.3s;
+  }
   .card:hover::after { opacity:1; }
+
   .card-icon { width:52px; height:52px; border-radius:14px; overflow:hidden; flex-shrink:0; border:1px solid var(--border); position:relative; }
   .card-icon img { width:100%; height:100%; object-fit:cover; }
   .card-icon .icon-overlay { position:absolute; inset:0; background:linear-gradient(135deg,rgba(99,179,237,0.12),rgba(183,148,244,0.08)); }
+
   .card-body { flex:1; min-width:0; }
   .card-title { font-size:13.5px; font-weight:600; margin-bottom:4px; }
   .card-sub { font-size:11px; color:var(--text-muted); font-weight:300; }
-  .card-arrow { flex-shrink:0; width:28px; height:28px; border-radius:8px; background:var(--surface); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; transition:all 0.3s; }
+
+  .card-arrow {
+    flex-shrink:0; width:28px; height:28px; border-radius:8px;
+    background:var(--surface); border:1px solid var(--border);
+    display:flex; align-items:center; justify-content:center;
+    transition:all 0.3s;
+  }
   .card:hover .card-arrow { background:rgba(99,179,237,0.12); border-color:rgba(99,179,237,0.3); transform:translateX(2px); }
   .card-arrow svg { width:13px; height:13px; stroke:var(--text-muted); transition:stroke 0.3s; }
   .card:hover .card-arrow svg { stroke:var(--accent-1); }
+
   .footer { margin-top:32px; text-align:center; animation:fadeUp 0.9s 0.22s cubic-bezier(0.16,1,0.3,1) both; }
   .footer-text { font-size:10.5px; color:var(--text-muted); letter-spacing:0.5px; }
-  .footer-text span { background:linear-gradient(90deg,var(--accent-1),var(--accent-2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; font-weight:500; }
+  .footer-text span {
+    background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; font-weight:500;
+  }
+
   .ripple { position:absolute; border-radius:50%; transform:scale(0); animation:rippleAnim 0.55s linear; background:rgba(255,255,255,0.1); pointer-events:none; }
   @keyframes rippleAnim { to { transform:scale(4); opacity:0; } }
 </style>
@@ -165,7 +354,9 @@
         <div class="card-sub">Langsung menuju halaman pembayaran</div>
       </div>
       <div class="card-arrow">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
       </div>
     </a>
 
@@ -179,7 +370,9 @@
         <div class="card-sub">Admin siap membantu kamu</div>
       </div>
       <div class="card-arrow">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
       </div>
     </a>
   </div>
@@ -197,15 +390,21 @@ document.addEventListener('mousemove', e => {
   mouseGlow.style.top  = e.clientY + 'px';
 });
 
-/* ─── Canvas ─── */
+/* ─── Canvas Setup ─── */
 const canvas = document.getElementById('bg-canvas');
 const ctx = canvas.getContext('2d');
 let W, H;
-function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+
+function resize() {
+  W = canvas.width  = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
 resize();
 window.addEventListener('resize', resize);
+
 const COLORS = ['#63b3ed','#b794f4','#f6ad55','#34d399','#f472b6'];
 
+/* ─── Floating Particles ─── */
 class Particle {
   constructor() { this.reset(true); }
   reset(init = false) {
@@ -215,14 +414,18 @@ class Particle {
     this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
     this.speed = Math.random() * 0.4 + 0.1;
     this.dx = (Math.random() - 0.5) * 0.3;
-    this.alpha = 0; this.maxAlpha = Math.random() * 0.6 + 0.2;
-    this.life = 0; this.maxLife = Math.random() * 400 + 200;
+    this.alpha = 0;
+    this.maxAlpha = Math.random() * 0.6 + 0.2;
+    this.life = 0;
+    this.maxLife = Math.random() * 400 + 200;
     this.twinkle = Math.random() * Math.PI * 2;
     this.twinkleSpeed = Math.random() * 0.03 + 0.01;
     this.fadeRate = Math.random() * 0.006 + 0.003;
   }
   update() {
-    this.y -= this.speed; this.x += this.dx; this.life++;
+    this.y -= this.speed;
+    this.x += this.dx;
+    this.life++;
     this.twinkle += this.twinkleSpeed;
     if (this.life < 60) this.alpha = Math.min(this.alpha + this.fadeRate, this.maxAlpha);
     else if (this.life > this.maxLife - 60) this.alpha = Math.max(this.alpha - this.fadeRate, 0);
@@ -230,13 +433,20 @@ class Particle {
   }
   draw() {
     const pulse = 0.85 + 0.15 * Math.sin(this.twinkle);
-    ctx.save(); ctx.globalAlpha = this.alpha * pulse;
-    ctx.shadowBlur = 6; ctx.shadowColor = this.color; ctx.fillStyle = this.color;
-    ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2); ctx.fill();
+    ctx.save();
+    ctx.globalAlpha = this.alpha * pulse;
+    ctx.shadowBlur = 6;
+    ctx.shadowColor = this.color;
+    ctx.fillStyle = this.color;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+    ctx.fill();
     ctx.restore();
   }
 }
+const particles = Array.from({length: 120}, () => new Particle());
 
+/* ─── Shooting Stars ─── */
 class ShootingStar {
   constructor() { this.reset(); }
   reset() {
@@ -245,7 +455,8 @@ class ShootingStar {
     this.len = Math.random() * 100 + 60;
     this.speed = Math.random() * 6 + 4;
     this.angle = Math.PI / 4 + (Math.random() - 0.5) * 0.3;
-    this.alpha = 0; this.active = false;
+    this.alpha = 0;
+    this.active = false;
     this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
     this.timer = Math.random() * 300 + 60;
   }
@@ -261,42 +472,58 @@ class ShootingStar {
     const tx = this.x - Math.cos(this.angle) * this.len;
     const ty = this.y - Math.sin(this.angle) * this.len;
     const g = ctx.createLinearGradient(tx, ty, this.x, this.y);
-    g.addColorStop(0, 'transparent'); g.addColorStop(1, this.color);
-    ctx.save(); ctx.globalAlpha = this.alpha * 0.75;
-    ctx.strokeStyle = g; ctx.lineWidth = 1.5;
-    ctx.shadowBlur = 10; ctx.shadowColor = this.color;
-    ctx.beginPath(); ctx.moveTo(tx, ty); ctx.lineTo(this.x, this.y); ctx.stroke();
+    g.addColorStop(0, 'transparent');
+    g.addColorStop(1, this.color);
+    ctx.save();
+    ctx.globalAlpha = this.alpha * 0.75;
+    ctx.strokeStyle = g;
+    ctx.lineWidth = 1.5;
+    ctx.shadowBlur = 10;
+    ctx.shadowColor = this.color;
+    ctx.beginPath();
+    ctx.moveTo(tx, ty);
+    ctx.lineTo(this.x, this.y);
+    ctx.stroke();
     ctx.restore();
   }
 }
+const shootingStars = Array.from({length: 3}, () => new ShootingStar());
 
+/* ─── Nebula blobs ─── */
 const nebulae = Array.from({length: 5}, () => ({
   x: Math.random() * (typeof W !== 'undefined' ? W : 800),
   y: Math.random() * (typeof H !== 'undefined' ? H : 600),
   r: Math.random() * 160 + 80,
   color: COLORS[Math.floor(Math.random() * COLORS.length)],
-  dx: (Math.random() - 0.5) * 0.15, dy: (Math.random() - 0.5) * 0.15,
+  dx: (Math.random() - 0.5) * 0.15,
+  dy: (Math.random() - 0.5) * 0.15,
   baseAlpha: Math.random() * 0.04 + 0.01,
-  phase: Math.random() * Math.PI * 2, phaseSpeed: Math.random() * 0.005 + 0.002
+  phase: Math.random() * Math.PI * 2,
+  phaseSpeed: Math.random() * 0.005 + 0.002
 }));
 
 function drawNebulae() {
   nebulae.forEach(n => {
     n.x += n.dx; n.y += n.dy; n.phase += n.phaseSpeed;
-    if (n.x < -n.r) n.x = W + n.r; if (n.x > W + n.r) n.x = -n.r;
-    if (n.y < -n.r) n.y = H + n.r; if (n.y > H + n.r) n.y = -n.r;
+    if (n.x < -n.r) n.x = W + n.r;
+    if (n.x > W + n.r) n.x = -n.r;
+    if (n.y < -n.r) n.y = H + n.r;
+    if (n.y > H + n.r) n.y = -n.r;
     const a = n.baseAlpha * (0.8 + 0.2 * Math.sin(n.phase));
     const hex = Math.round(a * 255).toString(16).padStart(2,'0');
     const g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r);
-    g.addColorStop(0, n.color + hex); g.addColorStop(1, 'transparent');
-    ctx.save(); ctx.fillStyle = g;
-    ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+    g.addColorStop(0, n.color + hex);
+    g.addColorStop(1, 'transparent');
+    ctx.save();
+    ctx.fillStyle = g;
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
   });
 }
 
-const particles = Array.from({length: 120}, () => new Particle());
-const shootingStars = Array.from({length: 3}, () => new ShootingStar());
-
+/* ─── Animate loop ─── */
 function animate() {
   ctx.clearRect(0, 0, W, H);
   drawNebulae();
@@ -329,97 +556,179 @@ document.querySelectorAll('.card').forEach(card => {
   });
   card.addEventListener('mouseleave', function() { this.style.transform = ''; });
 });
-
 /* =========================
-   PAYMENT MODAL — tidak diubah
+   PAYMENT INSTRUCTION MODAL
 ========================= */
 function openPayment(e) {
   e.preventDefault();
+
   const paymentUrl = "https://sociabuzz.com/rdwvoucher/tribe";
+
   const alertModal = document.createElement("div");
-  alertModal.style.cssText = `position:fixed;inset:0;background:rgba(4,6,15,0.85);display:flex;align-items:center;justify-content:center;z-index:9999;font-family:'DM Sans',sans-serif;padding:24px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;transition:opacity 0.3s ease;`;
+  alertModal.style.cssText = `
+    position: fixed; inset: 0; background: rgba(4, 6, 15, 0.85);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 9999; font-family: 'DM Sans', sans-serif;
+    padding: 24px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    opacity: 0; transition: opacity 0.3s ease;
+  `;
+  
+  // Desain dibuat menjadi list box agar terlihat sangat rapi dan profesional
   alertModal.innerHTML = `
-    <div style="background:var(--surface);border:1px solid var(--border);padding:28px 20px;border-radius:20px;max-width:340px;width:100%;text-align:center;box-shadow:0 20px 40px rgba(0,0,0,0.5);transform:translateY(20px);transition:transform 0.3s cubic-bezier(0.16,1,0.3,1);">
-      <div style="font-size:38px;margin-bottom:8px;filter:drop-shadow(0 0 10px rgba(99,179,237,0.4));">🛒</div>
-      <h3 style="font-size:16px;margin-bottom:20px;color:var(--text-primary);font-weight:600;letter-spacing:0.5px;">TATA CARA ORDER</h3>
-      <div style="text-align:left;display:flex;flex-direction:column;gap:10px;margin-bottom:24px;">
-        <div style="background:rgba(255,255,255,0.03);padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:12px;">
-          <div style="background:var(--accent-1);color:#000;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px;flex-shrink:0;">1</div>
-          <div style="font-size:12.5px;color:var(--text-primary);line-height:1.4;">Isi <b>Nominal</b> sesuai harga.</div>
+    <div style="background: var(--surface); border: 1px solid var(--border); padding: 28px 20px; border-radius: 20px; max-width: 340px; width: 100%; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.5); transform: translateY(20px); transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);">
+      <div style="font-size: 38px; margin-bottom: 8px; filter: drop-shadow(0 0 10px rgba(99,179,237,0.4));">🛒</div>
+      <h3 style="font-size: 16px; margin-bottom: 20px; color: var(--text-primary); font-weight: 600; letter-spacing: 0.5px;">TATA CARA ORDER</h3>
+      
+      <div style="text-align: left; display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px;">
+        
+        <div style="background: rgba(255,255,255,0.03); padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 12px;">
+          <div style="background: var(--accent-1); color: #000; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 12px; flex-shrink: 0;">1</div>
+          <div style="font-size: 12.5px; color: var(--text-primary); line-height: 1.4;">Isi <b>Nominal</b> sesuai harga.</div>
         </div>
-        <div style="background:rgba(255,255,255,0.03);padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:12px;">
-          <div style="background:var(--accent-2);color:#000;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px;flex-shrink:0;">2</div>
-          <div style="font-size:12.5px;color:var(--text-primary);line-height:1.4;">Kolom Pesan: Tulis <b>Username Roblox & Barang</b>.</div>
+
+        <div style="background: rgba(255,255,255,0.03); padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 12px;">
+          <div style="background: var(--accent-2); color: #000; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 12px; flex-shrink: 0;">2</div>
+          <div style="font-size: 12.5px; color: var(--text-primary); line-height: 1.4;">Kolom Pesan: Tulis <b>Username Roblox & Barang</b>.</div>
         </div>
-        <div style="background:rgba(255,255,255,0.03);padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:12px;">
-          <div style="background:var(--accent-3);color:#000;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px;flex-shrink:0;">3</div>
-          <div style="font-size:12.5px;color:var(--text-primary);line-height:1.4;">Kolom Nama: Tulis <b>Username Tiktok.</b></div>
+
+        <div style="background: rgba(255,255,255,0.03); padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 12px;">
+          <div style="background: var(--accent-3); color: #000; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 12px; flex-shrink: 0;">3</div>
+          <div style="font-size: 12.5px; color: var(--text-primary); line-height: 1.4;">Kolom Nama: Tulis <b>Username Tiktok.</b></div>
         </div>
-        <div style="background:rgba(255,255,255,0.03);padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:12px;">
-          <div style="background:#34d399;color:#000;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px;flex-shrink:0;">4</div>
-          <div style="font-size:12.5px;color:var(--text-primary);line-height:1.4;">Kolom Email: <b>Bebas</b> (Cth: roblox@gmail.com).</div>
+
+        <div style="background: rgba(255,255,255,0.03); padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 12px;">
+          <div style="background: #34d399; color: #000; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 12px; flex-shrink: 0;">4</div>
+          <div style="font-size: 12.5px; color: var(--text-primary); line-height: 1.4;">Kolom Email: <b>Bebas</b> (Cth: roblox@gmail.com).</div>
         </div>
+
       </div>
-      <button id="btn-lanjut-pay" style="background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#fff;border:none;padding:14px 24px;border-radius:99px;font-weight:600;font-size:13px;cursor:pointer;width:100%;box-shadow:0 4px 15px rgba(99,179,237,0.3);transition:transform 0.2s;">SAYA MENGERTI, LANJUT PEMBAYARAN</button>
-      <div style="margin-top:16px;text-align:center;"><button id="btn-batal-pay" style="background:transparent;border:none;color:var(--text-muted);font-size:11.5px;cursor:pointer;text-decoration:underline;">Kembali</button></div>
-    </div>`;
+
+      <button id="btn-lanjut-pay" style="background: linear-gradient(90deg, var(--accent-1), var(--accent-2)); color: #fff; border: none; padding: 14px 24px; border-radius: 99px; font-weight: 600; font-size: 13px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(99,179,237,0.3); transition: transform 0.2s;">
+        SAYA MENGERTI, LANJUT PEMBAYARAN
+      </button>
+      
+      <div style="margin-top: 16px; text-align: center;">
+        <button id="btn-batal-pay" style="background: transparent; border: none; color: var(--text-muted); font-size: 11.5px; cursor: pointer; text-decoration: underline;">
+          Kembali
+        </button>
+      </div>
+    </div>
+  `;
   document.body.appendChild(alertModal);
-  requestAnimationFrame(() => { alertModal.style.opacity="1"; alertModal.firstElementChild.style.transform="translateY(0)"; });
-  document.getElementById("btn-batal-pay").addEventListener("click", function() { alertModal.style.opacity="0"; setTimeout(()=>alertModal.remove(),300); });
+
+  // Animasi masuk
+  requestAnimationFrame(() => {
+    alertModal.style.opacity = "1";
+    alertModal.firstElementChild.style.transform = "translateY(0)";
+  });
+
+  // Tombol Batal
+  document.getElementById("btn-batal-pay").addEventListener("click", function() {
+    alertModal.style.opacity = "0";
+    setTimeout(() => alertModal.remove(), 300);
+  });
+
+  // Tombol Lanjut ke Pembayaran
   document.getElementById("btn-lanjut-pay").addEventListener("click", function() {
-    this.style.transform="scale(0.96)";
+    this.style.transform = "scale(0.96)"; 
+    
     setTimeout(() => {
-      alertModal.firstElementChild.innerHTML=`<div style="font-size:14px;letter-spacing:1px;color:var(--accent-1);padding:30px 20px;display:flex;flex-direction:column;align-items:center;gap:16px;"><div style="width:28px;height:28px;border:3px solid rgba(99,179,237,0.2);border-top-color:var(--accent-1);border-radius:50%;animation:spinRing 1s linear infinite;"></div>Mengarahkan ke Halaman Pembayaran...</div>`;
-      setTimeout(() => { window.open(paymentUrl,"_blank"); alertModal.style.opacity="0"; setTimeout(()=>alertModal.remove(),300); }, 800);
+      alertModal.firstElementChild.innerHTML = `
+        <div style="font-size: 14px; letter-spacing: 1px; color: var(--accent-1); padding: 30px 20px; display: flex; flex-direction: column; align-items: center; gap: 16px;">
+          <div style="width: 28px; height: 28px; border: 3px solid rgba(99,179,237,0.2); border-top-color: var(--accent-1); border-radius: 50%; animation: spinRing 1s linear infinite;"></div>
+          Mengarahkan ke Halaman Pembayaran...
+        </div>
+      `;
+      
+      // Buka tab baru setelah jeda sedikit
+      setTimeout(() => {
+        window.open(paymentUrl, "_blank");
+        
+        // Tutup modal setelah diarahkan
+        alertModal.style.opacity = "0";
+        setTimeout(() => alertModal.remove(), 300);
+      }, 800);
     }, 150);
   });
 }
-
-/* =========================
-   OPEN WA — DIPERBAIKI
-   Pakai Android Intent agar
-   langsung buka app WA,
-   bypass TikTok WebView
-========================= */
-function openWA(e) {
+function openWA(e){
   e.preventDefault();
 
   const phone = "6287767775774";
-  const text  = encodeURIComponent("Halo Kak saya butuh bantuan nih, bisa bantu saya?");
-  const waWeb = "https://wa.me/" + phone + "?text=" + text;
-  const ua    = navigator.userAgent.toLowerCase();
+  const message = "Halo Kak saya butuh bantuan nih, bisa bantu saya?";
 
-  // ── Tampilkan loading modal dulu ──
-  const modal = document.createElement("div");
-  modal.style.cssText = "position:fixed;inset:0;background:rgba(4,6,15,0.85);display:flex;align-items:center;justify-content:center;z-index:9999;font-family:'DM Sans',sans-serif;padding:24px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;transition:opacity 0.3s ease;";
-  modal.innerHTML = `<div style="background:var(--surface);border:1px solid var(--border);padding:32px 24px;border-radius:20px;max-width:300px;width:100%;text-align:center;box-shadow:0 20px 40px rgba(0,0,0,0.5);transform:translateY(20px);transition:transform 0.3s cubic-bezier(0.16,1,0.3,1);">
-    <div style="font-size:40px;margin-bottom:14px;">💬</div>
-    <div style="font-size:14px;letter-spacing:0.5px;color:var(--accent-1);display:flex;flex-direction:column;align-items:center;gap:12px;">
-      <div style="width:26px;height:26px;border:3px solid rgba(99,179,237,0.2);border-top-color:var(--accent-1);border-radius:50%;animation:spinRing 1s linear infinite;"></div>
-      Membuka WhatsApp...
+  const text = encodeURIComponent(message);
+
+  const ua = navigator.userAgent.toLowerCase();
+  const isAndroid = ua.includes("android");
+  const isiOS = /iphone|ipad|ipod/.test(ua);
+  const isTikTok = ua.includes("tiktok");
+
+  const waApp = `whatsapp://send?phone=${phone}&text=${text}`;
+  const waWeb = `https://wa.me/${phone}?text=${text}`;
+  const waDesktop = `https://web.whatsapp.com/send?phone=${phone}&text=${text}`;
+
+  /* ===== Custom Alert Modal ===== */
+  const alertModal = document.createElement("div");
+  alertModal.style.cssText = `
+    position: fixed; inset: 0; background: rgba(4, 6, 15, 0.85);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 9999; font-family: 'DM Sans', sans-serif;
+    padding: 24px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    opacity: 0; transition: opacity 0.3s ease;
+  `;
+  
+  alertModal.innerHTML = `
+    <div style="background: var(--surface); border: 1px solid var(--border); padding: 28px 24px; border-radius: 20px; max-width: 320px; width: 100%; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.5); transform: translateY(20px); transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);">
+      <div style="font-size: 40px; margin-bottom: 12px; filter: drop-shadow(0 0 10px rgba(246,173,85,0.4));">⚠️</div>
+      <h3 style="font-size: 14px; margin-bottom: 16px; color: var(--accent-3); line-height: 1.5; font-weight: 600; letter-spacing: 0.5px;">JIKA TIDAK BISA BERPINDAH KE WA, IKUTI BERIKUT:</h3>
+      <div style="text-align: left; font-size: 12.5px; color: var(--text-primary); opacity: 0.9; line-height: 1.8; margin-bottom: 24px; background: rgba(0,0,0,0.3); padding: 14px 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
+        <b>1.</b> KLIK TITIK TIGA DI POJOK KANAN ATAS<br>
+        <b>2.</b> PILIH MENU "BUKA DI BROWSER"
+      </div>
+      <button id="btn-lanjut-wa" style="background: linear-gradient(90deg, var(--accent-1), var(--accent-2)); color: #fff; border: none; padding: 14px 24px; border-radius: 99px; font-weight: 600; font-size: 13px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(99,179,237,0.3); transition: transform 0.2s;">
+        MENGERTI, LANJUTKAN
+      </button>
     </div>
-  </div>`;
-  document.body.appendChild(modal);
-  requestAnimationFrame(() => { modal.style.opacity="1"; modal.firstElementChild.style.transform="translateY(0)"; });
+  `;
+  document.body.appendChild(alertModal);
 
-  // ── Redirect logic ──
-  if (/android/.test(ua)) {
-    // Android Intent → OS Android langsung buka app WA, tidak bisa diblokir WebView
-    const intent = "intent://send?phone=" + phone
-                 + "&text=" + text
-                 + "#Intent;scheme=whatsapp;package=com.whatsapp;end";
-    window.location.href = intent;
-    // Fallback ke wa.me jika WA tidak terinstall
-    setTimeout(() => { window.location.href = waWeb; }, 2000);
-  } else if (/iphone|ipad|ipod/.test(ua)) {
-    window.location.href = "whatsapp://send?phone=" + phone + "&text=" + text;
-    setTimeout(() => { window.location.href = waWeb; }, 2000);
-  } else {
-    window.location.href = waWeb;
-  }
+  // Animasi masuk (Fade In + Slide Up)
+  requestAnimationFrame(() => {
+    alertModal.style.opacity = "1";
+    alertModal.firstElementChild.style.transform = "translateY(0)";
+  });
 
-  // Tutup modal setelah 3 detik
-  setTimeout(() => { modal.style.opacity="0"; setTimeout(()=>modal.remove(),300); }, 3000);
+  // Event listener untuk tombol lanjut
+  document.getElementById("btn-lanjut-wa").addEventListener("click", function() {
+    this.style.transform = "scale(0.96)"; // Efek klik
+    
+    // Ubah tampilan menjadi state loading
+    setTimeout(() => {
+      alertModal.firstElementChild.innerHTML = `
+        <div style="font-size: 14px; letter-spacing: 1px; color: var(--accent-1); padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 12px;">
+          <div style="width: 24px; height: 24px; border: 3px solid rgba(99,179,237,0.2); border-top-color: var(--accent-1); border-radius: 50%; animation: spinRing 1s linear infinite;"></div>
+          Membuka WhatsApp...
+        </div>
+      `;
+      
+      /* ===== Redirect Logic ===== */
+      if(isAndroid || isiOS){
+          window.location.href = waApp;
+          setTimeout(()=>{ window.location.href = waWeb; }, 1200);
+      } else if(isTikTok){
+          window.location.href = waWeb;
+      } else {
+          window.location.href = waDesktop;
+      }
+
+      // Hapus modal setelah dieksekusi
+      setTimeout(() => {
+        alertModal.style.opacity = "0";
+        setTimeout(() => alertModal.remove(), 300);
+      }, 2500);
+    }, 150);
+  });
 }
 </script>
 </body>
